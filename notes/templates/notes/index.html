@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Cloud Notes</title>
+    <style>
+        body { font-family: sans-serif; margin: 40px; background: #f4f4f4; }
+        .note-card { background: white; padding: 20px; margin-bottom: 10px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .icon { width: 50px; height: 50px; border-radius: 5px; float: right; }
+        .meta { color: #666; font-size: 0.8em; }
+        .category { background: #e1f5fe; padding: 2px 8px; border-radius: 10px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>My Notes</h1>
+    {% for note in notes %}
+        <div class="note-card">
+            {% if note.icon %}
+                <img src="{{ note.icon.url }}" class="icon">
+            {% endif %}
+            <h2>{{ note.title }} <span class="category">{{ note.category }}</span></h2>
+            <p class="meta">Taken on: {{ note.note_date }} | Added: {{ note.date_add|date:"M d, Y" }}</p>
+            <p>{{ note.content }}</p>
+        </div>
+    {% empty %}
+        <p>No notes found. Go to <angle-bracket>/admin</angle-bracket> to add some!</p>
+    {% endfor %}
+</body>
+</html>
