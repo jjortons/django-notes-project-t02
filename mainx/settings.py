@@ -164,3 +164,25 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+
+# tell django to allow this app to be framed (called from another webpage)
+
+# Option A: Allow any site to frame your app (easiest for portfolios)
+X_FRAME_OPTIONS = 'ALLOWALL'
+
+# Option B: More secure (Standard Django default is 'DENY' or 'SAMEORIGIN')
+# If you only want your specific blog to frame it, you'd use middleware, 
+# but for a portfolio, ALLOWALL is usually fine.
+
+
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "localhost,127.0.0.1").split(",")
+
+
+# Add your blog's domain to trusted origins for form submissions
+CSRF_TRUSTED_ORIGINS = [
+    'https://django-notes-project-t02.onrender.com'c,
+    'https://your-blog-domain.github.io', # if using GitHub Pages
+     'https://miracleostrich.ca',
+]
